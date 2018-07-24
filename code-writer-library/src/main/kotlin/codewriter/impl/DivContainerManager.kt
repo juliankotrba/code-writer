@@ -9,12 +9,12 @@ import org.w3c.dom.HTMLSpanElement
 import kotlin.browser.document
 
 /**
- * Implementation for a HTML div container
+ * Implementation for a HTML div container manager
  *
  * @author  Julian Kotrba
  */
-class HtmlDivContainer(private val codeContainer: HTMLDivElement,
-                       private inline val writeDelayGenerator: () -> Int) : ContainerManagement {
+class DivContainerManager(private val codeContainer: HTMLDivElement,
+                          private inline val writeDelayGenerator: () -> Int) : ContainerManager {
 
     override suspend fun appendLineOfCode(codeLine: CodeLine) {
         val lineContainer = document.createElement("div") as HTMLDivElement

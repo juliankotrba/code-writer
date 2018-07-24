@@ -1,7 +1,7 @@
 package codewriter.impl
 
 import codewriter.CodeWriter
-import codewriter.ContainerManagement
+import codewriter.ContainerManager
 import kotlinx.coroutines.experimental.launch
 import model.CodeBlock
 
@@ -10,13 +10,13 @@ import model.CodeBlock
  *
  * @author  Julian Kotrba
  */
-class JsCodeWriter(private val containerManagement: ContainerManagement) : CodeWriter {
+class JsCodeWriter(private val containerManager: ContainerManager) : CodeWriter {
 
     override fun write(code: CodeBlock) {
 
         launch {
             code.codeLines.forEach { codeLine ->
-                containerManagement.appendLineOfCode(codeLine)
+                containerManager.appendLineOfCode(codeLine)
             }
         }
 

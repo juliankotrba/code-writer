@@ -8,6 +8,6 @@ import model.CodeLine
  *
  * @author  Julian Kotrba
  */
-interface ContainerManagement {
+interface ContainerManager {
     suspend fun appendLineOfCode(codeLine: CodeLine)
 }
