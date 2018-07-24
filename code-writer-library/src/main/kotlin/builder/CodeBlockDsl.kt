@@ -170,4 +170,4 @@ fun code(init: CodeBuilder.() -> Unit): CodeBlock {
     return codeBuilder.build()
 }
 
-fun String.addPrefixTabs(tabCount: Int): String = "    ".repeat(0) + this
+fun String.addPrefixTabs(tabCount: Int): String = "    ".repeat(tabCount) + this
