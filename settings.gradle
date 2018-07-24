@@ -9,3 +9,6 @@ pluginManagement {
 }
 rootProject.name = 'code-writer'
 
+include 'application'
+include 'code-writer-library'
+include 'code-writer-example'
