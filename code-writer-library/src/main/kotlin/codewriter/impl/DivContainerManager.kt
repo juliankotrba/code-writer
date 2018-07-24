@@ -21,7 +21,9 @@ class DivContainerManager(private val codeContainer: HTMLDivElement,
         val lineContainer = document.createElement("div") as HTMLDivElement
         this.codeContainer.appendChild(lineContainer)
 
-        codeLine.line.forEach { handleText(it, lineContainer) }
+        codeLine.line.forEach {
+            handleText(it, lineContainer)
+        }
     }
 
     private suspend fun handleText(codeSequence: CodeSequence, codeLineContainer: HTMLDivElement) {
