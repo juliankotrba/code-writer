@@ -164,7 +164,7 @@ class CodeBuilder {
     }
 }
 
-fun code(init: CodeBuilder.() -> Unit): CodeBlock {
+fun codeBlock(init: CodeBuilder.() -> Unit): CodeBlock {
     val codeBuilder = CodeBuilder()
     codeBuilder.init()
     return codeBuilder.build()
