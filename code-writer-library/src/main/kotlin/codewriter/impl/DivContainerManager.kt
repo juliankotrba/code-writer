@@ -1,5 +1,6 @@
-package codewriter
+package codewriter.impl
 
+import codewriter.ContainerManager
 import kotlinx.coroutines.experimental.delay
 import model.CodeLine
 import model.TextStyle
@@ -14,34 +15,34 @@ import kotlin.browser.document
  * @author  Julian Kotrba
  */
 class DivContainerManager(private val codeContainer: HTMLDivElement,
-                          private inline val writeDelayGenerator: () -> Int) : ContainerManager {
+                          private inline val writeDelayInMillisGenerator: () -> Int) : ContainerManager {
 
     override suspend fun appendLineOfCode(codeLine: CodeLine) {
         val lineContainer = document.createElement("div") as HTMLDivElement
         this.codeContainer.appendChild(lineContainer)
 
-        codeLine.line.forEach { handleText(it, lineContainer, this.writeDelayGenerator) }
+        codeLine.line.forEach { handleText(it, lineContainer) }
     }
 
-    private suspend fun handleText(codeSequence: CodeSequence, codeLineContainer: HTMLDivElement, delayGenerator: () -> Int) {
-        val span = createSpanElement(codeSequence)
+    private suspend fun handleText(codeSequence: CodeSequence, codeLineContainer: HTMLDivElement) {
+        val span = codeSequence.toSpanElement()
         codeLineContainer.appendChild(span)
 
         codeSequence.text.forEach { char ->
             span.innerText = span.innerText + char
-            delay(delayGenerator.invoke())
+            delay(this.writeDelayInMillisGenerator.invoke())
         }
 
-        val (_, textStyleAfter) = codeSequence.styleBeforeAndAfter
+        val textStyleAfter = codeSequence.styleBeforeAndAfter.second
         span.setAttribute("style", textStyleAfter.toCssString() + "white-space: pre")
     }
 
-    private fun createSpanElement(codeSequence: CodeSequence): HTMLSpanElement {
-        val (textStyleBefore, _) = codeSequence.styleBeforeAndAfter
+    private fun CodeSequence.toSpanElement(): HTMLSpanElement {
+        val textStyleBefore = this.styleBeforeAndAfter.first
         return (document.createElement("span") as HTMLSpanElement).apply {
             this.textContent = ""
             this.setAttribute("style", textStyleBefore.toCssString() + "white-space: pre")
-            this.setAttribute("class", codeSequence.additionalElementClass)
+            this.setAttribute("class", this@toSpanElement.additionalElementClass)
         }
     }
 
