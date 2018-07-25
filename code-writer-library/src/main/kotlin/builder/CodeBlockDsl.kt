@@ -21,7 +21,7 @@ class CodeSequenceBuilder(var text: String,
 
 class MultipleCodeSequencesBuilder(var charSequences: List<String>,
                                    var beforeAndAfterStyles: List<Pair<TextStyle, TextStyle>>,
-                                   var additionalClasses: List<Pair<Int, String>> = emptyList()) {
+                                   var elementClasses: List<Pair<Int, String>> = emptyList()) {
 
     fun build(): List<CodeSequence> {
         validate()
@@ -31,7 +31,7 @@ class MultipleCodeSequencesBuilder(var charSequences: List<String>,
     private fun validate() {
         validateCharSequences()
         validateBeforeAndAfterStyles()
-        validateAdditionalClasses()
+        validateElementClasses()
     }
 
     private fun validateCharSequences() {
@@ -49,9 +49,9 @@ class MultipleCodeSequencesBuilder(var charSequences: List<String>,
         }
     }
 
-    private fun validateAdditionalClasses() {
-        if (additionalClasses.isNotEmpty()) {
-            additionalClasses.forEach { (index, _) ->
+    private fun validateElementClasses() {
+        if (elementClasses.isNotEmpty()) {
+            elementClasses.forEach { (index, _) ->
                 if (index < 1) {
                     throw IllegalArgumentException("An index less than or equal to one is not allowed. " +
                             "Use an index from 1 to ${charSequences.size}."
@@ -66,7 +66,7 @@ class MultipleCodeSequencesBuilder(var charSequences: List<String>,
     }
 
     private fun createCodeSequences(): List<CodeSequence> {
-        val indexToAdditionalClassMap = additionalClasses.toMap()
+        val indexToElementClassMap = elementClasses.toMap()
         val codeSequences = mutableListOf<CodeSequence>()
 
         for (i in 0 until charSequences.size) {
@@ -74,7 +74,7 @@ class MultipleCodeSequencesBuilder(var charSequences: List<String>,
                     CodeSequence(
                             charSequences[i],
                             beforeAndAfterStyles[i],
-                            indexToAdditionalClassMap.getOrElse(i + 1) { "" }
+                            indexToElementClassMap.getOrElse(i + 1) { "" }
                     )
             )
         }
