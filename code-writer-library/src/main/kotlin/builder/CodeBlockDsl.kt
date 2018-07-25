@@ -132,6 +132,17 @@ class CodeLineBuilder {
         texts += textWrapperBuilder.build()
     }
 
+    fun multipleCodeSequencesWithLeadingTabs(tabCount: Int, init: MultipleCodeSequencesBuilder.() -> Unit) {
+        val textWrapperBuilder = MultipleCodeSequencesBuilder(emptyList(), emptyList(), emptyList())
+        textWrapperBuilder.init()
+
+        val copyOfCharSequences = textWrapperBuilder.charSequences.toMutableList()
+        textWrapperBuilder.charSequences = copyOfCharSequences.apply {
+            this[0] = this[0].addPrefixTabs(tabCount)
+        }
+        texts += textWrapperBuilder.build()
+    }
+
     fun build(): CodeLine {
         return CodeLine(this.texts)
     }
