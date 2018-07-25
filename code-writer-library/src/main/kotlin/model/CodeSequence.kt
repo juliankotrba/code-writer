@@ -6,5 +6,5 @@ package model
  * @author  Julian Kotrba
  */
 data class CodeSequence(val text: String,
-                        val beforeAndAfterStyle: BeforeAndAfterStyle,
+                        val styleSet: StyleSet,
                         val additionalElementClass: String = "")

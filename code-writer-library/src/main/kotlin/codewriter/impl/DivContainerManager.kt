@@ -35,12 +35,12 @@ class DivContainerManager(private val codeContainer: HTMLDivElement,
             delay(this.writeDelayInMillisGenerator.invoke())
         }
 
-        val textStyleAfter = codeSequence.beforeAndAfterStyle.textStyleAfter
+        val textStyleAfter = codeSequence.styleSet.textStyleAfter
         span.setAttribute("style", textStyleAfter.toCssString() + "white-space: pre")
     }
 
     private fun CodeSequence.toSpanElement(): HTMLSpanElement {
-        val textStyleBefore = this.beforeAndAfterStyle.textStyleBefore
+        val textStyleBefore = this.styleSet.textStyleBefore
         return (document.createElement("span") as HTMLSpanElement).apply {
             this.textContent = ""
             this.setAttribute("style", textStyleBefore.toCssString() + "white-space: pre")
