@@ -15,7 +15,7 @@ import kotlin.browser.document
  * @author  Julian Kotrba
  */
 class DivContainerManager(private val codeContainer: HTMLDivElement,
-                          private inline val writeDelayInMillisGenerator: () -> Int) : ContainerManager {
+                          private inline val writeDelayInMillisGenerator: () -> Int = { 0 }) : ContainerManager {
 
     override suspend fun appendLineOfCode(codeLine: CodeLine) {
         val lineContainer = document.createElement("div") as HTMLDivElement
@@ -51,3 +51,4 @@ class DivContainerManager(private val codeContainer: HTMLDivElement,
     private fun CodeSequenceStyle.toCssString() = "color: ${this.colorInHex};" +
             "font-weight: ${this.fontWeight};"
 }
+
