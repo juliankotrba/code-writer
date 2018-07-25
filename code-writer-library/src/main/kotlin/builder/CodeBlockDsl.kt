@@ -3,7 +3,7 @@ package builder
 import model.CodeBlock
 import model.CodeLine
 import model.CodeSequence
-import model.TextStyle
+import model.CodeSequenceStyle
 
 /**
  * Dsl builder for a code block
@@ -11,7 +11,7 @@ import model.TextStyle
  * @author  Julian Kotrba
  */
 class CodeSequenceBuilder(var text: String,
-                          var styleBeforeAndAfter: Pair<TextStyle, TextStyle>,
+                          var styleBeforeAndAfter: Pair<CodeSequenceStyle, CodeSequenceStyle>,
                           var elementClass: String = "") {
 
     fun build(): CodeSequence {
@@ -20,7 +20,7 @@ class CodeSequenceBuilder(var text: String,
 }
 
 class MultipleCodeSequencesBuilder(var charSequences: List<String>,
-                                   var beforeAndAfterStyles: List<Pair<TextStyle, TextStyle>>,
+                                   var beforeAndAfterStyles: List<Pair<CodeSequenceStyle, CodeSequenceStyle>>,
                                    var elementClasses: List<Pair<Int, String>> = emptyList()) {
 
     fun build(): List<CodeSequence> {
@@ -42,7 +42,7 @@ class MultipleCodeSequencesBuilder(var charSequences: List<String>,
 
     private fun validateBeforeAndAfterStyles() {
         if (beforeAndAfterStyles.size != charSequences.size) {
-            throw IllegalArgumentException("There must be a Pair<styleBefore: TextStyle, styleAfter: TextStyle> for " +
+            throw IllegalArgumentException("There must be a Pair<styleBefore: CodeSequenceStyle, styleAfter: CodeSequenceStyle> for " +
                     "every char sequence. Currently there ${if (beforeAndAfterStyles.size == 1) "is" else "are"} just" +
                     "${beforeAndAfterStyles.size} style ${if (beforeAndAfterStyles.size == 1) "pair" else "pairs"}."
             )
@@ -98,13 +98,13 @@ class CodeLineBuilder {
     fun codeSequence(init: CodeSequenceBuilder.() -> Unit) {
         val textWrapperBuilder = CodeSequenceBuilder(
                 CODE_SEQUENCE_DEFAULT_TEXT,
-                Pair(TextStyle(CODE_SEQUENCE_DEFAULT_COLOR), TextStyle(CODE_SEQUENCE_DEFAULT_COLOR))
+                Pair(CodeSequenceStyle(CODE_SEQUENCE_DEFAULT_COLOR), CodeSequenceStyle(CODE_SEQUENCE_DEFAULT_COLOR))
         )
         textWrapperBuilder.init()
         texts += textWrapperBuilder.build()
     }
 
-    fun codeSequence(_text: String, _styleBeforeAndAfter: Pair<TextStyle, TextStyle>, _elementClass: String = "") {
+    fun codeSequence(_text: String, _styleBeforeAndAfter: Pair<CodeSequenceStyle, CodeSequenceStyle>, _elementClass: String = "") {
         codeSequence {
             text = _text
             styleBeforeAndAfter = _styleBeforeAndAfter
@@ -112,14 +112,14 @@ class CodeLineBuilder {
         }
     }
 
-    fun codeSequenceWithTabs(tabCount: Int, text: String, styleBeforeAndAfter: Pair<TextStyle, TextStyle>, elementClass: String = "") {
+    fun codeSequenceWithTabs(tabCount: Int, text: String, styleBeforeAndAfter: Pair<CodeSequenceStyle, CodeSequenceStyle>, elementClass: String = "") {
         codeSequence(text.addPrefixTabs(tabCount), styleBeforeAndAfter, elementClass)
     }
 
     fun codeSequenceWithTabs(tabCount: Int, init: CodeSequenceBuilder.() -> Unit) {
         val textWrapperBuilder = CodeSequenceBuilder(
                 CODE_SEQUENCE_DEFAULT_TEXT,
-                Pair(TextStyle(CODE_SEQUENCE_DEFAULT_COLOR), TextStyle(CODE_SEQUENCE_DEFAULT_COLOR))
+                Pair(CodeSequenceStyle(CODE_SEQUENCE_DEFAULT_COLOR), CodeSequenceStyle(CODE_SEQUENCE_DEFAULT_COLOR))
         )
         textWrapperBuilder.init()
         val textWrapper = textWrapperBuilder.build()

@@ -3,7 +3,7 @@ package codewriter.impl
 import codewriter.ContainerManager
 import kotlinx.coroutines.experimental.delay
 import model.CodeLine
-import model.TextStyle
+import model.CodeSequenceStyle
 import model.CodeSequence
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLSpanElement
@@ -48,6 +48,6 @@ class DivContainerManager(private val codeContainer: HTMLDivElement,
         }
     }
 
-    private fun TextStyle.toCssString() = "color: ${this.colorInHex};" +
+    private fun CodeSequenceStyle.toCssString() = "color: ${this.colorInHex};" +
             "font-weight: ${this.fontWeight};"
 }
