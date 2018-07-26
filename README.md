@@ -1,6 +1,7 @@
+![](assets/demo.mov)
 ## Code writer
 
-This is the library I use for my code introduction block on my website. See [juliankotrba.xyz](https://juliankotrba.xyz).
+This is the library I use for my code introduction block on my website. Please see [juliankotrba.xyz](https://juliankotrba.xyz).
 
 ### Usage
 
