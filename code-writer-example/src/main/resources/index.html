@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<style>
+    .unknown {
+        -webkit-text-decoration: #F44336 underline wavy;
+        text-decoration: #F44336 underline wavy;
+    }
+
+    @media only screen and (max-width: 1000px) {
+        .breakable:after {
+            content: "\a ";
+            white-space: pre;
+        }
+
+        .cssTab {
+            margin-left: 170px;
+        }
+    }
+</style>
+
+<body style="background-color: #263238;">
+
+<div id="code_container" style="font-family: monospace; font-size: 18px;"></div>
+
+
+<script type="text/javascript" src="js/lib/kotlin.js"></script>
+<script type="text/javascript" src="js/lib/kotlinx-coroutines-core-js.js"></script>
+<script type="text/javascript" src="js/lib/code-writer-library.js"></script>
+<script type="text/javascript" src="js/code-writer-example.js"></script>
+</body>
+
+</html>

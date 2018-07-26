@@ -1,0 +1,21 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #263238;
+}
+
+.code_container {
+    padding: 20px 20px 20px 20px;
+    font-size: 1.4em;
+    font-family: monospace;
+}
+
+.code_container span {
+    white-space: pre;
+}
+
+.unresolved {
+    -webkit-text-decoration: #F44336 underline wavy;
+    text-decoration: #F44336 underline wavy;
+}

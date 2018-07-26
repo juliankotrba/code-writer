@@ -1,0 +1,61 @@
+group 'xyz.juliankotrba'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.2.50'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin2js'
+
+
+repositories {
+    mavenCentral()
+    maven { url "https://kotlin.bintray.com/kotlinx/" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile project(':code-writer-library')
+}
+
+compileKotlin2Js {
+    kotlinOptions {
+        outputFile = "${projectDir}/web/js/${project.name}.js"
+        sourceMap = true
+        sourceMapEmbedSources = "always"
+    }
+}
+
+build.doLast {
+    configurations.compile.each { File file ->
+        copy {
+            includeEmptyDirs = false
+
+            from zipTree(file.absolutePath)
+            into "${projectDir}/web/js/lib"
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                (path.endsWith(".js") || path.endsWith(".js.map")) &&
+                        (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+            }
+        }
+    }
+
+    // Copy everthing from resources into web
+    copy {
+        from sourceSets.main.output.resourcesDir
+        into "${projectDir}/web"
+    }
+}
+
+clean.doFirst {
+    delete "${projectDir}/web"
+}
+
