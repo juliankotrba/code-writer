@@ -1,4 +1,6 @@
-![](assets/demo.mov)
+<video width="99%"  autoplay loop muted>
+        <source src="assets/demo.mov" type="video/mp4">
+</video>
 ## Code writer
 
 This is the library I use for my code introduction block on my website. Please see [juliankotrba.xyz](https://juliankotrba.xyz).
