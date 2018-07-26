@@ -1,6 +1,4 @@
-<video width="99%"  autoplay loop muted>
-        <source src="assets/demo.mov" type="video/mp4">
-</video>
+![](assets/demo.gif)
 
 # Code writer
 
