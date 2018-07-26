@@ -1,15 +1,16 @@
 <video width="99%"  autoplay loop muted>
         <source src="assets/demo.mov" type="video/mp4">
 </video>
-## Code writer
+
+# Code writer
 
 This is the library I use for my code introduction block on my website. Please see [juliankotrba.xyz](https://juliankotrba.xyz).
 
-### Usage
+## Usage
 
-#### Creating a code block using a DSL
+### Creating a code block using a DSL
 
-##### Styles
+#### Styles
 
 A code sequences' style set consists of two styles. A style _textStyleBefore_, which is used when writing and
 a style _textStyleAfter_ that is applied after the last character of the code string has been written.
@@ -35,7 +36,7 @@ object Styles {
 }
 ```
 
-##### Code block DSL
+#### Code block DSL
 
 The following code example shows how to create a new code block. First you need to call the _codeBock_ 
 function. Inside the passed lambda you need to define code lines with the _codeLine_ function. Last but not least, the 
@@ -101,7 +102,7 @@ Every code sequence also stores an element class (default value is an empty stri
 styling is needed. In the above example this property is used to mark an error because of the missing enum class _Pkm_. 
 It can also be used to make the code responsive as you can see inside the lambdas of the _codeSequenceWithTabs_ functions.
 
-#### Writing
+### Writing
 
 A container manager needs so be created first. This example uses the a manager for a \<div\> tag container. The second 
 argument of the _DivContainerManager_ is a function, which generates a write delay in milliseconds. 
@@ -120,7 +121,7 @@ JsCodeWriter(divContainerManager)
 
 ```
 
-#### Web directory
+### Web directory
 
 You can create a Gradle task to put all generated JavaScript files into a specific directory. 
 In the example module, all JavaScript files get put into _web/js_ after building. 
