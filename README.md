@@ -123,7 +123,7 @@ JsCodeWriter(divContainerManager)
 
 You can create a Gradle task to put all generated JavaScript files into a specific directory. 
 In the example module, all JavaScript files get put into _web/js_ after building. 
-Also the HTML/CSS files in the resource folder are copied to the web folder. For further information check out the [build.gradle](code-writer-library/build.gradle) file.
+Also the HTML/CSS files in the resource folder are copied to the web folder. For further information check out the [build.gradle](code-writer-example/build.gradle) file.
 
 
 ## License
