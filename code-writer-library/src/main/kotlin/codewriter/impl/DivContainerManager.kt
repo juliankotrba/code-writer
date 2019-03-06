@@ -1,7 +1,7 @@
 package codewriter.impl
 
 import codewriter.ContainerManager
-import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.delay
 import model.CodeLine
 import model.CodeSequenceStyle
 import model.CodeSequence
@@ -32,7 +32,7 @@ class DivContainerManager(private val codeContainer: HTMLDivElement,
 
         codeSequence.text.forEach { char ->
             span.innerText = span.innerText + char
-            delay(this.writeDelayInMillisGenerator.invoke())
+            delay(this.writeDelayInMillisGenerator.invoke().toLong())
         }
 
         val textStyleAfter = codeSequence.styleSet.textStyleAfter
