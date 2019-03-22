@@ -3,7 +3,6 @@ package codewriter.impl
 import codewriter.CodeWriter
 import codewriter.ContainerManager
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import model.CodeBlock
 
