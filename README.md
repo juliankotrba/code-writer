@@ -114,8 +114,7 @@ val divContainerManager = DivContainerManager(divContainer) {
     listOf(40, 40, 40, 50, 60, 100, 150).shuffled().first()
 }
 
-JsCodeWriter(divContainerManager)
-        .write(introductionCode)
+CodeWriter(GlobalScope, divContainerManager).write(introductionCode)
 
 ```
 
