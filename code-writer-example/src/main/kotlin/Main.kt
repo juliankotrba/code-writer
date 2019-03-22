@@ -26,7 +26,7 @@ import kotlin.browser.document
  * @author  Julian Kotrba
  */
 
-fun main(args: Array<String>) {
+fun main() {
 
     val divContainer = document.getElementById("code_container") as HTMLDivElement
     val divContainerManager = ContainerManager(divContainer) {
