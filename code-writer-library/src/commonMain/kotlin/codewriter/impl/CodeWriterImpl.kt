@@ -2,19 +2,23 @@ package codewriter.impl
 
 import codewriter.CodeWriter
 import codewriter.ContainerManager
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import model.CodeBlock
 
 /**
- * JsCodeWriter
+ * CodeWriterImpl
  *
  * @author  Julian Kotrba
  */
-class JsCodeWriter(private val containerManager: ContainerManager) : CodeWriter {
+class CodeWriterImpl(
+        private val coroutineScope: CoroutineScope,
+        private val containerManager: ContainerManager
+) : CodeWriter {
 
     override fun write(code: CodeBlock) {
-        GlobalScope.launch {
+        this.coroutineScope.launch {
             code.codeLines.forEach { codeLine ->
                 containerManager.appendLineOfCode(codeLine)
             }

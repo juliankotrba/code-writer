@@ -1,23 +1,22 @@
-package codewriter.impl
+package codewriter
 
-import codewriter.ContainerManager
 import kotlinx.coroutines.delay
 import model.CodeLine
-import model.CodeSequenceStyle
 import model.CodeSequence
+import model.CodeSequenceStyle
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLSpanElement
 import kotlin.browser.document
 
 /**
- * Implementation for a HTML div container manager
+ * This class is an actual implementation for a HTML div container manager
  *
  * @author  Julian Kotrba
  */
-class DivContainerManager(private val codeContainer: HTMLDivElement,
-                          private inline val writeDelayInMillisGenerator: () -> Int = { 0 }) : ContainerManager {
+actual class ContainerManager(private val codeContainer: HTMLDivElement,
+                              private inline val writeDelayInMillisGenerator: () -> Int = { 0 }) {
 
-    override suspend fun appendLineOfCode(codeLine: CodeLine) {
+    actual suspend fun appendLineOfCode(codeLine: CodeLine) {
         val lineContainer = document.createElement("div") as HTMLDivElement
         this.codeContainer.appendChild(lineContainer)
 
@@ -51,4 +50,3 @@ class DivContainerManager(private val codeContainer: HTMLDivElement,
     private fun CodeSequenceStyle.toCssString() = "color: ${this.colorInHex};" +
             "font-weight: ${this.fontWeight};"
 }
-
