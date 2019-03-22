@@ -6,7 +6,7 @@ import Styles.STRING_STYLES
 import Styles.VAR_STYLES
 import builder.codeBlock
 import codewriter.ContainerManager
-import codewriter.impl.CodeWriterImpl
+import codewriter.CodeWriter
 import kotlinx.coroutines.GlobalScope
 import model.StyleSet
 import model.CodeSequenceStyle
@@ -33,8 +33,7 @@ fun main() {
         listOf(40, 40, 50, 60, 100, 150, 200).shuffled().first()
     }
 
-    CodeWriterImpl(GlobalScope, divContainerManager)
-            .write(introductionCode)
+    CodeWriter(GlobalScope, divContainerManager).write(introductionCode)
 }
 
 private object Styles {

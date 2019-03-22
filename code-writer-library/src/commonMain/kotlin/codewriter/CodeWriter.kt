@@ -1,12 +1,25 @@
 package codewriter
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import model.CodeBlock
 
 /**
- * CodeWriter
+ * CodeWriterImpl
  *
  * @author  Julian Kotrba
  */
-interface CodeWriter {
-    fun write(code: CodeBlock)
+class CodeWriter(
+        private val coroutineScope: CoroutineScope,
+        private val containerManager: ContainerManager
+) {
+
+    fun write(code: CodeBlock) {
+        this.coroutineScope.launch {
+            code.codeLines.forEach { codeLine ->
+                containerManager.appendLineOfCode(codeLine)
+            }
+        }
+
+    }
 }
