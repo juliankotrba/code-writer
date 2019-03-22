@@ -5,7 +5,7 @@ import kotlinx.coroutines.launch
 import model.CodeBlock
 
 /**
- * CodeWriterImpl
+ * CodeWriter
  *
  * @author  Julian Kotrba
  */
