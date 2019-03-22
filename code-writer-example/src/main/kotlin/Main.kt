@@ -5,9 +5,9 @@ import Styles.KW_STYLES
 import Styles.STRING_STYLES
 import Styles.VAR_STYLES
 import builder.codeBlock
-import codewriter.impl.DivContainerManager
-import codewriter.impl.JsCodeWriter
-import model.CodeBlock
+import codewriter.ContainerManager
+import codewriter.CodeWriter
+import kotlinx.coroutines.GlobalScope
 import model.StyleSet
 import model.CodeSequenceStyle
 import model.WeightValue
@@ -26,16 +26,14 @@ import kotlin.browser.document
  * @author  Julian Kotrba
  */
 
-fun main(args: Array<String>) {
+fun main() {
 
     val divContainer = document.getElementById("code_container") as HTMLDivElement
-
-    val divContainerManager = DivContainerManager(divContainer) {
+    val divContainerManager = ContainerManager(divContainer) {
         listOf(40, 40, 50, 60, 100, 150, 200).shuffled().first()
     }
 
-    JsCodeWriter(divContainerManager)
-            .write(introductionCode)
+    CodeWriter(GlobalScope, divContainerManager).write(introductionCode)
 }
 
 private object Styles {
